@@ -18,10 +18,10 @@
                     </li>
 
                     <li>
-                        <a href="calendar.html" class=" waves-effect">
+                        <Link href="/dashboard/inventory" class=" waves-effect">
                             <div class="d-inline-block icons-sm mr-1"><i class="uim uim-schedule"></i></div>
                             <span>Inventory</span>
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
