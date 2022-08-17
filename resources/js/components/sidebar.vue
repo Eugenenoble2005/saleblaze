@@ -1,4 +1,5 @@
 <template>
+    <shared/>
     <!-- ========== Left Sidebar Start ========== -->
     <div class="vertical-menu">
 
@@ -11,21 +12,21 @@
                     <li class="menu-title">Menu</li>
 
                     <li>
-                        <a href="index.html" class="waves-effect">
+                        <a href="/dashboard" class="waves-effect">
                             <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div><span class="badge badge-pill badge-success float-right">3</span>
                             <span>Dashboard</span>
                         </a>
                     </li>
 
                     <li>
-                        <Link href="/dashboard/inventory" class=" waves-effect">
+                        <a href="/dashboard/inventory" class=" waves-effect">
                             <div class="d-inline-block icons-sm mr-1"><i class="uim uim-schedule"></i></div>
                             <span>Inventory</span>
-                        </Link>
+                        </a>
                     </li>
 
                     <li>
-                        <a href="calendar.html" class=" waves-effect">
+                        <a href="/dashboard/staff" class=" waves-effect">
                             <div class="d-inline-block icons-sm mr-1"><i class="uim uim-schedule"></i></div>
                             <span>Staff</span>
                         </a>
@@ -53,8 +54,13 @@
 </template>
 
 <script>
+import {loadScript, unloadScript} from "vue-plugin-load-script";
+import {Inertia} from "@inertiajs/inertia";
+import Shared from "./shared";
+
 export default {
-    name: "sidebar"
+    name: "sidebar",
+    components: {Shared},
 }
 
 </script>

@@ -1,4 +1,5 @@
 <template>
+    <shared/>
     <body data-topbar="colored">
 
     <!-- Begin page -->
@@ -117,20 +118,7 @@
                                                     <td>Chioma David</td>
                                                     <td>26 Jan</td>
                                                     <td>&#8358; 20,000.00</td>
-                                                    <td>
-                                                        <div class="btn-group" role="group">
-                                                            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="View">
-                                                                <i class="mdi mdi-eye"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                                <i class="mdi mdi-pencil"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                                <i class="mdi mdi-trash-can"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+m,m,                                                   </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -171,7 +159,7 @@
 
                                                 <div class="media-body">
                                                     <p class="text-muted mb-2">Number of Sales</p>
-                                                    <h5 class="mb-0">1,625</h5>
+                                                    <h5 class="mb-0">335</h5>
                                                 </div>
                                                 <div class="icons-lg ml-2 align-self-center">
                                                     <i class="uim uim-layer-group"></i>
@@ -181,187 +169,27 @@
                                         <li class="list-group-item">
                                             <div class="media my-2">
                                                 <div class="media-body">
-                                                    <p class="text-muted mb-2">Sales Revenue </p>
-                                                    <h5 class="mb-0">$ 42,235</h5>
+                                                    <p class="text-muted mb-2">Sales Profit </p>
+                                                    <h5 class="mb-0"> &#8358; 700,000</h5>
                                                 </div>
                                                 <div class="icons-lg ml-2 align-self-center">
                                                     <i class="uim uim-analytics"></i>
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="list-group-item">
-                                            <div class="media my-2">
-                                                <div class="media-body">
-                                                    <p class="text-muted mb-2">Average Price</p>
-                                                    <h5 class="mb-0">$ 14.56</h5>
-                                                </div>
-                                                <div class="icons-lg ml-2 align-self-center">
-                                                    <i class="uim uim-ruler"></i>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="media my-2">
-                                                <div class="media-body">
-                                                    <p class="text-muted mb-2">Product Sold</p>
-                                                    <h5 class="mb-0">8,235</h5>
-                                                </div>
-                                                <div class="icons-lg ml-2 align-self-center">
-                                                    <i class="uim uim-box"></i>
-                                                </div>
-                                            </div>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="card">
+                            <div class = "col-lg-8">
+                                <div class = "card">
                                     <div class="card-body">
-                                        <h5 class="header-title mb-4">Social Source</h5>
-                                        <div id="radial-chart" class="apex-charts"></div>
-
-                                        <div class="text-center mt-3">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div>
-                                                        <p class="text-muted"><i class="mdi mdi-circle text-primary mr-1"></i> Facebook</p>
-                                                        <h5>$ 1,625</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div>
-                                                        <p class="text-muted"><i class="mdi mdi-circle text-warning mr-1"></i> Twitter</p>
-                                                        <h5>$ 1,504</h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="header-title">Recent Activity</h5>
-
-                                        <div id="activity-chart" class="apex-charts"></div>
+                                        <h4>This is the main dashboard, where our customer can see quick useful stats on their business. This includes a quick outline of their latest sales, the profit and revenue for the month as well as their best selling goods</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end row -->
 
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="float-right ml-2">
-                                            <a href="#">View all</a>
-                                        </div>
-                                        <h5 class="header-title mb-4">Latest Sales</h5>
-
-                                        <div class="table-responsive">
-                                            <table class="table table-centered table-hover mb-0">
-                                                <thead>
-                                                <tr>
-                                                    <th scope="col">Transaction ID</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Amount</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <th scope="row">
-                                                        <a href="#"># XO1345</a>
-                                                    </th>
-                                                    <td>Danny Johnson</td>
-                                                    <td>26 Jan</td>
-                                                    <td>$124</td>
-                                                    <td>
-                                                        <div class="btn-group" role="group">
-                                                            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="View">
-                                                                <i class="mdi mdi-eye"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                                <i class="mdi mdi-pencil"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                                <i class="mdi mdi-trash-can"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                        <div class="mt-4">
-                                            <ul class="pagination pagination-rounded justify-content-center mb-0">
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" aria-label="Previous">
-                                                        <i class="mdi mdi-chevron-left"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Next">
-                                                        <i class="mdi mdi-chevron-right"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="header-title mb-4">Revenue by Location</h5>
-
-                                        <div id="usa-map"  style="height: 150px" class="mb-5"></div>
-
-                                        <div class="table-responsive">
-                                            <table class="table table-centered">
-                                                <tbody>
-                                                <tr>
-                                                    <th scope="row">California</th>
-                                                    <td>$ 8,257</td>
-                                                    <td>
-                                                        <div dir="ltr" class="ml-2">
-                                                            <input data-plugin="knob" data-width="36" data-height="36" data-linecap=round data-displayInput=false
-                                                                   data-fgColor="#3051d3" value="56" data-skin="tron" data-angleOffset="36"
-                                                                   data-readOnly=true data-thickness=".2" />
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">New York</th>
-                                                    <td>$ 7,253</td>
-                                                    <td>
-                                                        <div dir="ltr" class="ml-2">
-                                                            <input data-plugin="knob" data-width="36" data-height="36" data-linecap=round data-displayInput=false
-                                                                   data-fgColor="#3051d3" value="42" data-skin="tron" data-angleOffset="36"
-                                                                   data-readOnly=true data-thickness=".2" />
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-
-                                            <div class="text-center">
-                                                <a href="#" class="btn btn-primary btn-sm">View more <i class="mdi mdi-arrow-right ml-1"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <!-- end row -->
 
                     </div> <!-- container-fluid -->
@@ -369,19 +197,12 @@
                 <!-- end page-content-wrapper -->
             </div>
             <!-- End Page-content -->
-
-
-            @@include("partials/footer.html")
+            <Footer/>
         </div>
         <!-- end main content-->
 
     </div>
     <!-- END layout-wrapper -->
-
-    @@include("partials/right-sidebar.html")
-
-
-
     </body>
 </template>
 
@@ -389,15 +210,14 @@
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import { Head } from "@inertiajs/inertia-vue3";
-import { loadScript } from "vue-plugin-load-script"
+import  Footer from "../components/footer"
+import {loadScript, unloadScript} from "vue-plugin-load-script"
+import {Inertia} from "@inertiajs/inertia";
+import Shared from "../components/shared";
 export default {
     name: "home",
-    components: {Topbar, Sidebar,Head},
-    mounted() {
-        //init menu
-    loadScript("js/template/app.js");
-    loadScript("js/template/dashboard.init.js");
-    }
+    components: {Shared, Topbar, Sidebar,Head,Footer},
+
 }
 </script>
 

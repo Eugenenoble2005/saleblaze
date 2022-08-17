@@ -24,6 +24,7 @@ Route::post("login","AuthenticationController@signin")->name("login");
 Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::get("","DashboardController@index")->name("dashboard.index");
     Route::get("/inventory","DashboardController@inventory");
+    Route::get("/staff","DashboardController@staff");
 });
 
 

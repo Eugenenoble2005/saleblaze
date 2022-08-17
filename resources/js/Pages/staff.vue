@@ -21,7 +21,7 @@
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h4 class="page-title mb-1">Goods In Your Inventory</h4>
+                                <h4 class="page-title mb-1">Your staff</h4>
                             </div>
                             <div class="col-md-4">
                                 <div class="float-right d-none d-md-block">
@@ -47,36 +47,55 @@
 
                 <div class="page-content-wrapper">
                     <div class="container-fluid">
-                            <div class="col-12">
-                                <div class="card-deck-wrapper">
-                                    <div class="card-deck row">
-                                        <div class="card col-md-4" v-for = "x in [1,2,3]">
-                                            <img class="card-img-top img-fluid" src="images/benz.webp" alt="Card image cap">
-                                            <div class="card-body">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item text text-success">Selling Price: &#8358; 3,000,000 </li>
-                                                    <li class="list-group-item text text-danger">Cost price:  &#8358; 2,500,000</li>
-                                                    <li class="list-group-item text text-danger">Units Purchased:  10</li>
-                                                    <li class="list-group-item text text-success">Units Sold:  9</li>
-                                                    <li class="list-group-item text text-success">Profit:  &#8358; 2,000,000</li>
-                                                </ul>
-                                                <div class="card-body">
-                                                    <a href="#" class="btn btn-success">Add Unit</a> &nbsp;
-                                                    <a href="#" class="btn btn-success">Record sale</a>
-                                                </div>
-                                            </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <button style="text-align:right;float:right" class = "btn btn-info">New</button>
+                                        <h4 class="header-title">Staff</h4>
+                                        <p class="card-title-desc">Manage your staff and employees here.
+                                        </p>
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Role</th>
+                                                    <th>Pay Salary</th>
+                                                    <th>Remove</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr v-for="(x,key) in [1,2,3,4,5,6,7,8,9,10]">
+                                                    <th scope="row"> {{ key+1 }} </th>
+                                                    <td>Chioma</td>
+                                                    <td>David</td>
+                                                    <td>Sales Rep</td>
+                                                    <td><a class = "btn btn-secondary" href = "#">Pay Salary</a></td>
+                                                    <td><a class = "btn btn-danger" href = "#">Remove</a></td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                        <!-- end row -->
+
                     </div>
                     <!-- end container-fluid -->
-                </div><br><br>
+                </div> <br><br>
                 <div class = "row">
                     <div class = "col-md-12">
                         <div class = "card">
                             <div class = "card-body">
-                                <h5>This is where our customers can looak at the goods stored in their inventory. From which they can view the number of units sold as well as the revenue and profit raised from each good. They can also record a sale for a good here and can also increase the inventory.</h5>
+                                <h5>This is where our customers can manage their employees. Can assign them new roles and disbure their salaries with ease</h5>
                             </div>
                         </div>
                     </div>
@@ -102,7 +121,7 @@ import {Inertia} from "@inertiajs/inertia";
 import Shared from "../components/shared";
 import Footer from "../components/footer"
 export default {
-    name: "inventory",
+    name: "staff",
     components: {Shared, Topbar, Sidebar,Head,Footer},
 
 }

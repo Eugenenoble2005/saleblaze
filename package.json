@@ -21,6 +21,9 @@
         "@inertiajs/inertia-vue3": "^0.6.0",
         "@inertiajs/progress": "^0.2.7",
         "bootstrap": "^5.2.0",
+        "jquery": "^3.6.0",
+        "metismenu": "^3.0.7",
+        "nprogress": "^0.2.0",
         "vue": "^3.2.37",
         "vue-plugin-load-script": "^2.1.1"
     }
