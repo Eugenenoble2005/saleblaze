@@ -9,7 +9,7 @@ class StaffController extends Controller
 {
     public function index()
     {
-
+        return inertia("staff",["staffs"=>\Auth::user()->staff()->latest()->get()]);
     }
 
     public function create(Request $request)

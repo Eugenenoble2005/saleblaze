@@ -93,19 +93,17 @@
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
+                                                    <th>Name</th>
                                                     <th>Role</th>
                                                     <th>Pay Salary</th>
                                                     <th>Remove</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr v-for="(x,key) in [1,2,3,4,5,6,7,8,9,10]">
+                                                <tr v-for="(staff,key) in staffs">
                                                     <th scope="row"> {{ key+1 }} </th>
-                                                    <td>Chioma</td>
-                                                    <td>David</td>
-                                                    <td>Sales Rep</td>
+                                                    <td>{{ staff.name }}</td>
+                                                    <td>{{ staff.role }}</td>
                                                     <td><a class = "btn btn-secondary" href = "#">Pay Salary</a></td>
                                                     <td><a class = "btn btn-danger" href = "#">Remove</a></td>
                                                 </tr>
@@ -124,15 +122,7 @@
                     </div>
                     <!-- end container-fluid -->
                 </div> <br><br>
-                <div class = "row">
-                    <div class = "col-md-12">
-                        <div class = "card">
-                            <div class = "card-body">
-                                <h5>This is where our customers can manage their employees. Can assign them new roles and disbure their salaries with ease</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- end page-content-wrapper -->
             </div>
             <!-- End Page-content -->
@@ -153,11 +143,13 @@ import {loadScript, unloadScript} from "vue-plugin-load-script"
 import {Inertia} from "@inertiajs/inertia";
 import Shared from "../components/shared";
 import Footer from "../components/footer"
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 export default {
     name: "staff",
+    props:["staffs"],
     components: {Shared, Topbar, Sidebar,Head,Footer},
     setup(){
+        let loading = ref(false)
         var form = reactive({
             name:"",
             role:"",
@@ -169,7 +161,7 @@ export default {
                 console.log(res)
                 if(res.data.state){
                     alertify.success(res.data.message)
-                    Inertia.reload({only:['goods']})
+                    Inertia.reload({only:['staffs']})
                 }
             })
         }

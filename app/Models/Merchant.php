@@ -12,4 +12,8 @@ class Merchant extends Authenticatable
     {
         return $this->hasMany(inventory::class);
     }
+    public function staff()
+    {
+        return $this->hasMany(staff::class);
+    }
 }

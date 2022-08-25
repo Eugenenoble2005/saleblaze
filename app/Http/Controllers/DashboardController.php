@@ -11,10 +11,6 @@ class DashboardController extends Controller
     {
         return Inertia::render("home");
     }
-    public function staff()
-    {
-        return Inertia::render("staff");
-    }
     public function credit()
     {
         return Inertia::render("credit");
