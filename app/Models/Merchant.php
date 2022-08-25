@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Merchant extends Authenticatable
 {
+    public function inventory()
+    {
+        return $this->hasMany(inventory::class);
+    }
 }

@@ -180,13 +180,6 @@ m,m,                                                   </tr>
                                     </ul>
                                 </div>
                             </div>
-                            <div class = "col-lg-8">
-                                <div class = "card">
-                                    <div class="card-body">
-                                        <h4>This is the main dashboard, where our customer can see quick useful stats on their business. This includes a quick outline of their latest sales, the profit and revenue for the month as well as their best selling goods</h4>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <!-- end row -->
 

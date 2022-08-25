@@ -23,8 +23,17 @@ Route::post("/register","AuthenticationController@signup")->name("register");
 Route::post("login","AuthenticationController@signin")->name("login");
 Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::get("","DashboardController@index")->name("dashboard.index");
-    Route::get("/inventory","DashboardController@inventory");
+    Route::prefix("/inventory")->group(function(){
+        Route::get("","InventoriesController@index");
+        Route::post("/create","InventoriesController@create");
+    });
+    Route::prefix("staff")->group(function(){
+        Route::get('create',"StaffController@create");
+    });
     Route::get("/staff","DashboardController@staff");
+    Route::get("/credit","DashboardController@credit");
+
+
 });
 
 

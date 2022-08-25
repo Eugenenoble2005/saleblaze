@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="calendar.html" class=" waves-effect">
+                        <a href="/dashboard/credit" class=" waves-effect">
                             <div class="d-inline-block icons-sm mr-1"><i class="uim uim-schedule"></i></div>
                             <span>Credit</span>
                         </a>

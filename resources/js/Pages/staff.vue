@@ -51,7 +51,40 @@
                             <div class="col-xl-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <button style="text-align:right;float:right" class = "btn btn-info">New</button>
+                                        <button style="text-align:right;float:right" class = "btn btn-info" data-toggle="modal" data-target=".bs-example-modal-center">New</button>
+                                        <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title mt-0">Add new staff member</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form @submit.prevent="submit">
+                                                            <div class="form-group row">
+                                                                <label for="example-text-input" class="col-md-2 col-form-label">Name</label>
+                                                                <div class="col-md-10">
+                                                                    <input class="form-control" v-model="form.name" type="text" id="example-text-input">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="example-search-input" class="col-md-2 col-form-label">Role</label>
+                                                                <div class="col-md-10">
+                                                                    <input class="form-control" type="text" v-model="form.role"  id="example-search-input">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                                                <button class="btn btn-primary waves-effect waves-light" type="submit" :disabled="loading">{{ loading ? "Please Wait" : "Save"}}</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div>
                                         <h4 class="header-title">Staff</h4>
                                         <p class="card-title-desc">Manage your staff and employees here.
                                         </p>
@@ -120,9 +153,28 @@ import {loadScript, unloadScript} from "vue-plugin-load-script"
 import {Inertia} from "@inertiajs/inertia";
 import Shared from "../components/shared";
 import Footer from "../components/footer"
+import {reactive} from "vue";
 export default {
     name: "staff",
     components: {Shared, Topbar, Sidebar,Head,Footer},
+    setup(){
+        var form = reactive({
+            name:"",
+            role:"",
+        })
+        function submit(){
+            loading.value = true
+            axios.post("/dashboard/staff/create",form).then((res)=>{
+                loading.value = false
+                console.log(res)
+                if(res.data.state){
+                    alertify.success(res.data.message)
+                    Inertia.reload({only:['goods']})
+                }
+            })
+        }
+        return {submit,form,loading}
+    }
 
 }
 </script>

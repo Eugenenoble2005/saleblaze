@@ -21,7 +21,53 @@
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h4 class="page-title mb-1">Goods In Your Inventory</h4>
+                                <h4 class="page-title mb-1">Goods In Your Inventory <button class="btn btn-outline-success" data-toggle="modal" data-target=".bs-example-modal-center">Add New</button></h4>
+                                <!-----Modal----->
+                                <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title mt-0">Add Item to Inventory</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form @submit.prevent="submit">
+                                                    <div class="form-group row">
+                                                        <label for="example-text-input" class="col-md-2 col-form-label">Name</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control" v-model="form.name" type="text" id="example-text-input">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="example-search-input" class="col-md-2 col-form-label">Cost</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control" type="number" v-model="form.cost"  id="example-search-input">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="example-search-input" class="col-md-2 col-form-label">Price</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control" type="number" v-model="form.price"  id="example-search-input">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="example-search-input" class="col-md-2 col-form-label">Units</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control" type="number" v-model ="form.units" id="example-search-input">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                                        <button class="btn btn-primary waves-effect waves-light" type="submit" :disabled="loading">{{ loading ? "Please Wait" : "Save"}}</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div>
+                                <!------End Modal---->
                             </div>
                             <div class="col-md-4">
                                 <div class="float-right d-none d-md-block">
@@ -47,40 +93,45 @@
 
                 <div class="page-content-wrapper">
                     <div class="container-fluid">
+                        <div class="row">
                             <div class="col-12">
-                                <div class="card-deck-wrapper">
-                                    <div class="card-deck row">
-                                        <div class="card col-md-4" v-for = "x in [1,2,3]">
-                                            <img class="card-img-top img-fluid" src="images/benz.webp" alt="Card image cap">
-                                            <div class="card-body">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item text text-success">Selling Price: &#8358; 3,000,000 </li>
-                                                    <li class="list-group-item text text-danger">Cost price:  &#8358; 2,500,000</li>
-                                                    <li class="list-group-item text text-danger">Units Purchased:  10</li>
-                                                    <li class="list-group-item text text-success">Units Sold:  9</li>
-                                                    <li class="list-group-item text text-success">Profit:  &#8358; 2,000,000</li>
-                                                </ul>
-                                                <div class="card-body">
-                                                    <a href="#" class="btn btn-success">Add Unit</a> &nbsp;
-                                                    <a href="#" class="btn btn-success">Record sale</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="header-title">Goods</h4>
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Cost</th>
+                                                <th>Price</th>
+                                                <th>Units</th>
+                                                <th>Profit</th>
+                                                <th>Add Unit</th>
+                                                <th>Record Sale</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="good in goods">
+                                                <td> {{ good.name }} </td>
+                                                <td> {{ good.cost}} </td>
+                                                <td>{{ good.price }}</td>
+                                                <td>{{ good.units }}</td>
+                                                <td>2,000,000</td>
+                                                <td><button class = "btn btn-primary">Add Unit</button></td>
+                                                <td><button class = "btn btn-info">Record Sale</button></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
                                     </div>
                                 </div>
-                            </div>
+                            </div> <!-- end col -->
+                        </div>
                     </div>
                     <!-- end container-fluid -->
                 </div><br><br>
-                <div class = "row">
-                    <div class = "col-md-12">
-                        <div class = "card">
-                            <div class = "card-body">
-                                <h5>This is where our customers can looak at the goods stored in their inventory. From which they can view the number of units sold as well as the revenue and profit raised from each good. They can also record a sale for a good here and can also increase the inventory.</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- end page-content-wrapper -->
             </div>
             <!-- End Page-content -->
@@ -101,10 +152,37 @@ import {loadScript, unloadScript} from "vue-plugin-load-script"
 import {Inertia} from "@inertiajs/inertia";
 import Shared from "../components/shared";
 import Footer from "../components/footer"
+import {reactive, ref} from "vue";
+import {InertiaProgress} from "@inertiajs/progress";
+import nprogress from "nprogress";
 export default {
     name: "inventory",
+    props:["message","error","state","goods"],
     components: {Shared, Topbar, Sidebar,Head,Footer},
-
+    mounted(){
+        $(document).ready(function(){$("#datatable").DataTable(),$("#datatable-buttons").DataTable({lengthChange:!1,buttons:["copy","excel","pdf","colvis"]}).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)")});
+    },
+    setup(props){
+        var loading = ref(false)
+        var form = reactive({
+            name:"",
+            cost:"",
+            price:"",
+            units:""
+        })
+        function submit(){
+            loading.value = true
+            axios.post("/dashboard/inventory/create",form).then((res)=>{
+                loading.value = false
+                console.log(res)
+                if(res.data.state){
+                    alertify.success(res.data.message)
+                    Inertia.reload({only:['goods']})
+                }
+            })
+        }
+        return {submit,form,loading}
+    }
 }
 </script>
 
