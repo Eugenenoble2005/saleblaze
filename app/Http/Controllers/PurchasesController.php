@@ -9,7 +9,7 @@ class PurchasesController extends Controller
 {
     public function index()
     {
-        return inertia("purchases");
+        return inertia("purchases",["purchases"=>\Auth::user()->purchase()->latest()->get()]);
     }
 
     public function create()

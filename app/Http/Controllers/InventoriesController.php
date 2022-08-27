@@ -30,16 +30,21 @@ class InventoriesController extends Controller
     }
     public function recordPurchase(inventory $inventory,Request $request)
     {
-        if($inventory->units < $request->units){
+        $validator = \Validator::make($request->all(),[
+            "units"=>["min:1"]
+        ]);
+        if($validator->fails()){
+            return response(["state"=>false,"message"=>$validator->errors()->all()[0]]);
+        }
+        if($inventory->units_left < $request->units){
             return response(["state"=>false,"message"=>"You dont have enough of this good in your inventory to ship this unit. Please add more"]);
         }
         if($inventory->purchase()->create([
             "customer_name" => $request->customer_name,
             "units" => $request->units,
-            "amount" => $inventory->price,
+            "amount" => $inventory->price * $request->units,
             "merchant_id" => \Auth::id()
         ])) {
-            $inventory->decrement("units",$request->units);
             return response()->json(["state" => true, "message" => "Sale Recorded Successfully. Please check your purchases page for more info"]);
         }
         return response(["state"=>false,"message"=>"Sale could not be recorded"]);
