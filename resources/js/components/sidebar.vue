@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="calendar.html" class=" waves-effect">
+                        <a href="/dashboard/purchases" class=" waves-effect">
                             <div class="d-inline-block icons-sm mr-1"><i class="uim uim-airplay"></i></div>
                             <span>Purchases</span>
                         </a>

@@ -26,10 +26,14 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::prefix("/inventory")->group(function(){
         Route::get("","InventoriesController@index");
         Route::post("/create","InventoriesController@create");
+        Route::post("/record-purchase/{inventory}","InventoriesController@recordPurchase");
     });
     Route::prefix("staff")->group(function(){
         Route::post('create',"StaffController@create");
         Route::get("","StaffController@index");
+    });
+    Route::prefix("purchases")->group(function(){
+        Route::get("/","PurchasesController@index");
     });
     Route::get("/credit","DashboardController@credit");
 });

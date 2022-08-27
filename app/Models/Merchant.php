@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Models;
-
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-
 class Merchant extends Authenticatable
 {
     public function inventory()
@@ -15,5 +12,9 @@ class Merchant extends Authenticatable
     public function staff()
     {
         return $this->hasMany(staff::class);
+    }
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class);
     }
 }

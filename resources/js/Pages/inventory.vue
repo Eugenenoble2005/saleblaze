@@ -68,6 +68,41 @@
                                     </div><!-- /.modal-dialog -->
                                 </div>
                                 <!------End Modal---->
+                                <!---Record Purchase Modal--->
+                                <div class="modal fade bs-example-modal-center-2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title mt-0">Record a purchase for this good</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form @submit.prevent="recordSale">
+                                                    <input type="hidden" ref="good_id" id="good_id"/>
+                                                    <div class="form-group row">
+                                                        <label for="example-text-input" class="col-md-2 col-form-label">Customer name</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control" v-model="form2.customer_name" type="text" id="example-text-input">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="example-search-input" class="col-md-2 col-form-label">Units Sold</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control" type="number" v-model="form2.units"  id="example-search-input">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                                        <button class="btn btn-primary waves-effect waves-light" type="submit" :disabled="loading">{{ loading ? "Please Wait" : "Save"}}</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div>
+                                <!---End record purchase modal-->
                             </div>
                             <div class="col-md-4">
                                 <div class="float-right d-none d-md-block">
@@ -105,7 +140,9 @@
                                                 <th>Name</th>
                                                 <th>Cost</th>
                                                 <th>Price</th>
-                                                <th>Units</th>
+                                                <th>Units Bought</th>
+                                                <th>Units Sold</th>
+                                                <th>Revenue</th>
                                                 <th>Profit</th>
                                                 <th>Add Unit</th>
                                                 <th>Record Sale</th>
@@ -115,11 +152,13 @@
                                             <tr v-for="good in goods">
                                                 <td> {{ good.name }} </td>
                                                 <td> {{ good.cost}} </td>
-                                                <td>{{ good.price }}</td>
+                                                <td>&#8358; {{ good.price.toLocaleString() }}</td>
                                                 <td>{{ good.units }}</td>
-                                                <td>2,000,000</td>
+                                                <td> {{ good.units_sold }}</td>
+                                                <td> &#8358; {{ good.revenue.toLocaleString() }} </td>
+                                                <td :class="{'text-danger':good.profit < 1,'text-success':good.profit > 1}"> &#8358; {{ good.profit.toLocaleString()}} </td>
                                                 <td><button class = "btn btn-primary">Add Unit</button></td>
-                                                <td><button class = "btn btn-info">Record Sale</button></td>
+                                                <td><button class = "btn btn-info" :data-id = "good.id" id = "#record_purchase" data-function="modal" data-toggle="modal" data-target=".bs-example-modal-center-2">Record Sale</button></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -160,14 +199,22 @@ export default {
     props:["message","error","state","goods"],
     components: {Shared, Topbar, Sidebar,Head,Footer},
     mounted(){
-        $(document).ready(function(){$("#datatable").DataTable(),$("#datatable-buttons").DataTable({lengthChange:!1,buttons:["copy","excel","pdf","colvis"]}).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)")});
+        $(function(){
+            $("button[data-function=modal]").click(function(){
+                $("#good_id").val($(this).data("id"));
+            })
+        })
     },
-    setup(props){
+    setup(){
         var loading = ref(false)
         var form = reactive({
             name:"",
             cost:"",
             price:"",
+            units:""
+        })
+        var form2 = reactive({
+            customer_name:"",
             units:""
         })
         function submit(){
@@ -179,9 +226,27 @@ export default {
                     alertify.success(res.data.message)
                     Inertia.reload({only:['goods']})
                 }
-            })
+                else{
+                    alertify.error(res.data.message[0])
+                }
+            }).catch((err)=>{console.log(err.response)})
         }
-        return {submit,form,loading}
+        function recordSale(){
+            loading.value = true
+          let good_id = document.getElementById("good_id").value;
+          axios.post(`/dashboard/inventory/record-purchase/${good_id}`,form2).then((rez)=>{
+              loading.value = false
+              console.log(rez)
+              if(rez.data.state){
+                  alertify.success(rez.data.message)
+                  Inertia.reload({only:["goods"]})
+              }
+              else{
+                  alertify.error(rez.data.message)
+              }
+          }).catch((error)=>{console.log(error.response)})
+        }
+        return {submit,form,form2,loading,recordSale}
     }
 }
 </script>
