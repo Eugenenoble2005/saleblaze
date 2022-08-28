@@ -69,7 +69,7 @@
                                                 <tr v-for="(purchase,key) in purchases">
                                                     <th scope="row"> {{ key+1 }} </th>
                                                     <td>{{ purchase?.customer_name }}</td>
-                                                    <td>{{ purchase?.amount }}</td>
+                                                    <td> &#8358; {{ purchase?.amount.toLocaleString() }}</td>
                                                     <td>{{purchase?.units}}</td>
                                                 </tr>
 

@@ -134,6 +134,18 @@
                                     <div class="card-body">
 
                                         <h4 class="header-title">Goods</h4>
+                                        <div class="dropdown">
+                                            <button class="btn btn-light btn-rounded dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               Financial Period - 2022
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Separated link</a>
+                                            </div>
+                                        </div>
                                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
@@ -151,7 +163,7 @@
                                             <tbody>
                                             <tr v-for="good in goods">
                                                 <td> {{ good.name }} </td>
-                                                <td> {{ good.cost}} </td>
+                                                <td> {{ good.cost.toLocaleString()}} </td>
                                                 <td>&#8358; {{ good.price.toLocaleString() }}</td>
                                                 <td>{{ good.units }}</td>
                                                 <td> {{ good.units_sold }}</td>
