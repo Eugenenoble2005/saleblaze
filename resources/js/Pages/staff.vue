@@ -85,6 +85,38 @@
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
                                         </div>
+                                        <div class="modal fade bs-example-modal-center-2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title mt-0">Pay Salary</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form @submit.prevent="paySalary">
+                                                            <div class="form-group row">
+                                                                    <label for="example-text-input" class="col-md-2 col-form-label">Amount</label>
+                                                                <div class="col-md-10">
+                                                                    <input class="form-control" v-model="form2.amount" type="number" id="example-text-input">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="example-text-input" class="col-md-2 col-form-label">Card Information</label>
+                                                                <div class="col-md-10">
+                                                                    <input class="form-control" v-model="form2.card" type="number" id="example-text-input">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                                                <button class="btn btn-primary waves-effect waves-light" type="submit" :disabled="loading">{{ loading ? "Please Wait" : "Save"}}</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div>
                                         <h4 class="header-title">Staff</h4>
                                         <p class="card-title-desc">Manage your staff and employees here.
                                         </p>
@@ -104,7 +136,7 @@
                                                     <th scope="row"> {{ key+1 }} </th>
                                                     <td>{{ staff.name }}</td>
                                                     <td>{{ staff.role }}</td>
-                                                    <td><a class = "btn btn-secondary" href = "#">Pay Salary</a></td>
+                                                    <td><button class = "btn btn-secondary" data-toggle="modal" data-target=".bs-example-modal-center-2">Pay Salary</button></td>
                                                     <td><a class = "btn btn-danger" href = "#">Remove</a></td>
                                                 </tr>
 
@@ -154,6 +186,10 @@ export default {
             name:"",
             role:"",
         })
+        var form2 = reactive({
+            amount:"",
+            card:""
+        })
         function submit(){
             loading.value = true
             axios.post("/dashboard/staff/create",form).then((res)=>{
@@ -165,7 +201,19 @@ export default {
                 }
             })
         }
-        return {submit,form,loading}
+        function paySalary()
+        {
+            loading.value = true
+            axios.post("/dashboard/staff/salary",form2).then((res)=>{
+                loading.value = false
+                console.log(res)
+                if(res.data.state){
+                    alertify.success(res.data.message)
+                    Inertia.reload({only:['staffs']})
+                }
+            }).catch((err)=>{this.loading = false;console.log(err.response)})
+        }
+        return {submit,form,loading,form2,paySalary}
     }
 
 }

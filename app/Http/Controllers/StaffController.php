@@ -20,7 +20,12 @@ class StaffController extends Controller
        return response(["state"=>false,"message"=>"Staff List could not be updates"]);
 
     }
-
+    public function paySalary(Request $request)
+    {
+        $url = "https://fsi.ng/api/v1/wema/alatpay-pc/api/v1/paymentCard/mc/initialize";
+        $response = \Http::withoutVerifying()->withHeaders(["sandbox-key"=>env("FSI_KEY")])->post($url,["cardNumber"=>$request->card]);
+        return response($response);
+    }
     public function store(Request $request)
     {
     }

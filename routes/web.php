@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get("/",function (){
+    return redirect()->route("dashboard.index");
+});
 Route::get('/register', function () {
     return \Inertia\Inertia::render("Authentication/signup",["logo"=>asset("images/saleblaze-logo.png")]);
 });
@@ -32,6 +34,7 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
     Route::prefix("staff")->group(function(){
         Route::post('create',"StaffController@create");
         Route::get("","StaffController@index");
+        Route::post("salary","StaffController@paySalary");
     });
     Route::prefix("purchases")->group(function(){
         Route::get("/","PurchasesController@index");
