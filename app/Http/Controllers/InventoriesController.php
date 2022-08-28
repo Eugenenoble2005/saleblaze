@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\inventory;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class InventoriesController extends Controller
@@ -48,6 +49,13 @@ class InventoriesController extends Controller
             return response()->json(["state" => true, "message" => "Sale Recorded Successfully. Please check your purchases page for more info"]);
         }
         return response(["state"=>false,"message"=>"Sale could not be recorded"]);
+    }
+    public function addUnit(Inventory $inventory,Request $request)
+    {
+        if($inventory->increment("units",$request->units))
+        {
+            return response(["state"=>true,"message"=>"Inventory increased for this good successfully"]);
+        }
     }
     public function store(Request $request)
     {

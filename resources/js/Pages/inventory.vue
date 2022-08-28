@@ -103,6 +103,35 @@
                                     </div><!-- /.modal-dialog -->
                                 </div>
                                 <!---End record purchase modal-->
+                                <!--Add unit modal--->
+                                <div class="modal fade bs-example-modal-center-3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title mt-0">Add A unit for this good</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form @submit.prevent="addUnit">
+                                                    <input type="hidden" ref="good_id" id="good_id"/>
+                                                    <div class="form-group row">
+                                                        <label for="example-text-input" class="col-md-2 col-form-label">Units</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control" v-model="form3.units" type="text" id="example-text-input">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                                        <button class="btn btn-primary waves-effect waves-light" type="submit" :disabled="loading">{{ loading ? "Please Wait" : "Save"}}</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div>
+                                <!----End add-unit modal-->
                             </div>
                             <div class="col-md-4">
                                 <div class="float-right d-none d-md-block">
@@ -169,7 +198,7 @@
                                                 <td> {{ good.units_sold }}</td>
                                                 <td> &#8358; {{ good.revenue.toLocaleString() }} </td>
                                                 <td :class="{'text-danger':good.profit < 1,'text-success':good.profit > 1}"> &#8358; {{ good.profit.toLocaleString()}} </td>
-                                                <td><button class = "btn btn-primary">Add Unit</button></td>
+                                                <td><button class = "btn btn-primary" :data-id = "good.id" id = "#record_purchase" data-function="modal" data-toggle="modal" data-target=".bs-example-modal-center-3">Add Unit</button></td>
                                                 <td><button class = "btn btn-info" :data-id = "good.id" id = "#record_purchase" data-function="modal" data-toggle="modal" data-target=".bs-example-modal-center-2">Record Sale</button></td>
                                             </tr>
                                             </tbody>
@@ -229,6 +258,9 @@ export default {
             customer_name:"",
             units:""
         })
+        var form3 = reactive({
+            units:""
+        })
         function submit(){
             loading.value = true
             axios.post("/dashboard/inventory/create",form).then((res)=>{
@@ -258,7 +290,23 @@ export default {
               }
           }).catch((error)=>{console.log(error.response)})
         }
-        return {submit,form,form2,loading,recordSale}
+        function addUnit()
+        {
+                loading.value = true
+            let good_id = document.getElementById("good_id").value;
+                axios.post(`/dashboard/inventory/add-unit/${good_id}`,form3).then((rez)=>{
+                    loading.value = false
+                    console.log(rez)
+                    if(rez.data.state){
+                        alertify.success(rez.data.message)
+                        Inertia.reload({only:["goods"]})
+                    }
+                    else{
+                        alertify.error(rez.data.message)
+                    }
+                })
+        }
+        return {submit,form,form2,loading,recordSale,addUnit,form3}
     }
 }
 </script>

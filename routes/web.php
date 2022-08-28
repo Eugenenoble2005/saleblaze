@@ -27,6 +27,7 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
         Route::get("","InventoriesController@index");
         Route::post("/create","InventoriesController@create");
         Route::post("/record-purchase/{inventory}","InventoriesController@recordPurchase");
+        Route::post("/add-unit/{inventory}","InventoriesController@addUnit");
     });
     Route::prefix("staff")->group(function(){
         Route::post('create',"StaffController@create");
