@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="card-body p-4">
                             <div class="p-2">
-                                <h5 class="mb-5 text-center">Register Account to Xoric.</h5>
+                                <h5 class="mb-5 text-center">Register Account to Saleblaze.</h5>
                                 <form class="form-horizontal" @submit.prevent="submit" autocapitalize="off">
 
                                     <div class="row">

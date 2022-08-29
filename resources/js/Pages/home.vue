@@ -57,7 +57,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <h5>Welcome Back !</h5>
-                                                <p class="text-muted">Xoric Dashboard</p>
+                                                <p class="text-muted">Saleblaze Dashboard</p>
 
                                                 <div class="mt-4">
                                                     <a href="#" class="btn btn-primary btn-sm">View more <i class="mdi mdi-arrow-right ml-1"></i></a>
@@ -100,25 +100,25 @@
                                         <h5 class="header-title mb-4">Latest Sales</h5>
 
                                         <div class="table-responsive">
-                                            <table class="table table-centered table-hover mb-0">
+                                            <table class="table mb-0">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col">Transaction ID</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Amount</th>
-                                                    <th scope="col">Action</th>
+                                                    <th>#</th>
+                                                    <th>Customer Name</th>
+                                                    <th>Good</th>
+                                                    <th>Amount</th>
+                                                    <th>Units</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr v-for="x in [1,2,3,4]">
-                                                    <th scope="row">
-                                                        <a href="#"># XO1345</a>
-                                                    </th>
-                                                    <td>Chioma David</td>
-                                                    <td>26 Jan</td>
-                                                    <td>&#8358; 20,000.00</td>
-m,m,                                                   </tr>
+                                                <tr v-for="(purchase,key) in sales">
+                                                    <th scope="row"> {{ key+1 }} </th>
+                                                    <td>{{ purchase?.customer_name }}</td>
+                                                    <td>{{purchase.inventory[0].name}}</td>
+                                                    <td> &#8358; {{ purchase?.amount.toLocaleString() }}</td>
+                                                    <td>{{purchase?.units}}</td>
+                                                </tr>
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -209,6 +209,7 @@ import {Inertia} from "@inertiajs/inertia";
 import Shared from "../components/shared";
 export default {
     name: "home",
+    props:["sales"],
     components: {Shared, Topbar, Sidebar,Head,Footer},
 
 }

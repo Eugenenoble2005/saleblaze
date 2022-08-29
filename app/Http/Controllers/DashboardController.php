@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return Inertia::render("home");
+        return Inertia::render("home",["sales"=>\Auth::user()->purchase()->latest()->get()]);
     }
     public function credit()
     {
