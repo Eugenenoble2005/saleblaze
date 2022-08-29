@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        inventory::factory()->count(30)->create();
+        inventory::factory()->count(5)->create();
     }
 }
