@@ -6,7 +6,7 @@ use App\Models\inventory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-class InventoryFactory extends Factory
+class inventoryFactory extends Factory
 {
     protected $model = inventory::class;
 
