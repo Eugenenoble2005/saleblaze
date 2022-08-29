@@ -21,6 +21,9 @@ Route::get('/register', function () {
 Route::get("login",function(){
     return \Inertia\Inertia::render("Authentication/signin",["logo"=>asset("images/saleblaze-logo.png")]);
 });
+Route::get("/financial-report",function(){
+    return view("report");
+});
 Route::post("/register","AuthenticationController@signup")->name("register");
 Route::post("login","AuthenticationController@signin")->name("login");
 Route::prefix("dashboard")->middleware("auth")->group(function(){
@@ -36,10 +39,14 @@ Route::prefix("dashboard")->middleware("auth")->group(function(){
         Route::get("","StaffController@index");
         Route::post("salary","StaffController@paySalary");
     });
+    Route::prefix("loan")->group(function(){
+        Route::post("/create","LoansController@create");
+        Route::get("mark-as-paid/{loan}","LoansController@markAsPaid");
+    });
     Route::prefix("purchases")->group(function(){
         Route::get("/","PurchasesController@index");
     });
-    Route::get("/credit","DashboardController@credit");
+    Route::get("/credit","LoansController@index");
 });
 
 

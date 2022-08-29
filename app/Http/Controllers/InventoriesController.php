@@ -17,9 +17,9 @@ class InventoriesController extends Controller
     {
         $validator = \Validator::make($request->all(),[
             "name"=>"required",
-            "cost"=>"required",
-            "price"=>"required",
-            "units"=>"required",
+            "cost"=>"required|numeric",
+            "price"=>"required|numeric|min:5",
+            "units"=>"required|numeric|min:5",
         ]);
         if($validator->fails()){
             return response(["state"=>false,"message"=>$validator->errors()->all()]);

@@ -17,5 +17,8 @@ class Merchant extends Authenticatable
     {
         return $this->hasMany(Purchase::class);
     }
-
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
 }

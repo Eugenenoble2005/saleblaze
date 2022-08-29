@@ -18,7 +18,7 @@ class StaffController extends Controller
         $validator = \Validator::make($request->all(),[
             "name"=>"required",
             "role"=>"required",
-            "telephone"=>"required"
+            "telephone"=>"required|numeric"
         ]);
         if($validator->fails()){
             return response(["state"=>false,"message"=>$validator->errors()->all()[0]]);
