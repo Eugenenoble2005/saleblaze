@@ -51,7 +51,7 @@
                             <div class="col-xl-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <button style = "text-align:right,float:right;" class = "btn btn-success">Generate Financial Report</button><br>
+                                        <a style = "text-align:right;" href = "../financial-report" target="_blank" class = "btn btn-success">Generate Financial Report</a><br>
                                         <button style="text-align:right;float:right" class = "btn btn-info" data-toggle="modal" data-target=".bs-example-modal-center">New</button>
                                         <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">

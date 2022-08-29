@@ -20592,10 +20592,12 @@ var _hoisted_11 = {
   "class": "card-body"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   style: {
-    "text-align": "right,float:right"
+    "text-align": "right"
   },
+  href: "../financial-report",
+  target: "_blank",
   "class": "btn btn-success"
 }, "Generate Financial Report", -1
 /* HOISTED */

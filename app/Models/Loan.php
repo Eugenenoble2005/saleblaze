@@ -13,4 +13,7 @@ class Loan extends Model
     {
         return Carbon::parse($this->created_at)->addMonths($this->duration);
     }
+    protected $casts = [
+        "date_repaid"=>"date"
+    ];
 }

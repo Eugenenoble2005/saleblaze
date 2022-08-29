@@ -8,13 +8,15 @@
 
     <!-- Favicon -->
     <link rel="icon" href="./images/favicon.png" type="image/x-icon" />
-
+    <link rel = "stylesheet" href="{{asset('css/template/bootstrap.min.css')}}">
     <!-- Invoice styling -->
     <style>
         body {
             font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             text-align: center;
             color: #777;
+            background:url('{{asset('images/bg-pattern.png')}}');
+            background-color: #3051d3!important;
         }
 
         body h1 {
@@ -39,6 +41,7 @@
         .invoice-box {
             max-width: 800px;
             margin: auto;
+            background: white;
             padding: 30px;
             border: 1px solid #eee;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
@@ -118,11 +121,6 @@
 </head>
 
 <body>
-<h1>A simple, clean, and responsive HTML invoice template</h1>
-<h3>Because sometimes, all you need is something simple.</h3>
-Find the code on <a href="https://github.com/sparksuite/simple-html-invoice-template">GitHub</a>. Licensed under the
-<a href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>.<br /><br /><br />
-
 <div class="invoice-box">
     <table>
         <tr class="top">
@@ -147,32 +145,13 @@ Find the code on <a href="https://github.com/sparksuite/simple-html-invoice-temp
                 <table>
                     <tr>
                         <td>
-                            Sparksuite, Inc.<br />
-                            12345 Sunny Road<br />
-                            Sunnyville, TX 12345
-                        </td>
-
-                        <td>
-                            Acme Corp.<br />
-                            John Doe<br />
-                            john@example.com
+                          Summary of financial and credit performance for {{ Auth::user()->shop_name }} for the financial period of {{ \Carbon\Carbon::now()->format("Y") }}
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
 
-        <tr class="heading">
-            <td>Payment Method</td>
-
-            <td>Check #</td>
-        </tr>
-
-        <tr class="details">
-            <td>Check</td>
-
-            <td>1000</td>
-        </tr>
 
         <tr class="heading">
             <td>Item</td>
@@ -181,28 +160,47 @@ Find the code on <a href="https://github.com/sparksuite/simple-html-invoice-temp
         </tr>
 
         <tr class="item">
-            <td>Website design</td>
+            <td>Total Cost</td>
 
-            <td>$300.00</td>
+            <td>&#8358; {{ number_format(Auth::user()->total_cost) }}</td>
         </tr>
 
         <tr class="item">
-            <td>Hosting (3 months)</td>
+            <td>Total Revenue</td>
 
-            <td>$75.00</td>
+            <td>&#8358; {{ number_format(Auth::user()->total_revenue) }} </td>
         </tr>
 
         <tr class="item last">
-            <td>Domain name (1 year)</td>
+            <td>Total Profit</td>
 
-            <td>$10.00</td>
+            <td ><span @class([
+        "text text-danger"=>Auth::user()->total_profit < 1,
+        "text text-success"=>Auth::user()->total_profit  > 1,
+])>&#8358; {{ number_format(Auth::user()->total_profit) }} </span></td>
         </tr>
 
-        <tr class="total">
-            <td></td>
-
-            <td>Total: $385.00</td>
-        </tr>
+    </table>
+        <h3>Loans and credit</h3>
+    <table>
+        <thead>
+            <tr>
+                <td>Creditor name</td>
+                <td>Amount</td>
+                <td>Collection Date</td>
+                <td>Maturity Date</td>
+                <td>Date Repaid</td>
+            </tr>
+        @foreach(Auth::user()->loans()->get() as $loan)
+            <tr>
+                <td>{{$loan->creditor_name}}</td>
+                <td>&#8358; {{ number_format($loan->amount)}}</td>
+                <td>{{$loan->created_at->format("M D Y")}}</td>
+                <td>{{$loan->maturity_date->format("M D Y")}}</td>
+                <td>{{$loan->date_repaid == null ? "Not Repaid Yet" : $loan->date_repaid->format("M D Y") }}</td>
+            </tr>
+        @endforeach
+        </thead>
     </table>
 </div>
 </body>

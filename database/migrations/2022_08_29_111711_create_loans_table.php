@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->integer("duration");
             $table->boolean("repaid")->default(false);
             $table->foreignIdFor(\App\Models\Merchant::class);
+            $table->timestamp("date_repaid")->nullable();
             $table->timestamps();
         });
     }

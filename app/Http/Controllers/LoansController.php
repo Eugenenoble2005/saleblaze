@@ -31,6 +31,7 @@ class LoansController extends Controller
     public function markAsPaid(Loan $loan)
     {
         $loan->repaid = true;
+        $loan->date_repaid = now();
         $loan->save();
         return response(["state"=>true]);
     }
