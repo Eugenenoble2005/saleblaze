@@ -75,7 +75,12 @@
                                                                     <input class="form-control" type="text" v-model="form.role"  id="example-search-input">
                                                                 </div>
                                                             </div>
-
+                                                            <div class="form-group row">
+                                                                <label for="example-text-input" class="col-md-2 col-form-label">Phone</label>
+                                                                <div class="col-md-10">
+                                                                    <input class="form-control" v-model="form.telephone" type="text" id="example-text-input">
+                                                                </div>
+                                                            </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                                                                 <button class="btn btn-primary waves-effect waves-light" type="submit" :disabled="loading">{{ loading ? "Please Wait" : "Save"}}</button>
@@ -127,6 +132,7 @@
                                                     <th>#</th>
                                                     <th>Name</th>
                                                     <th>Role</th>
+                                                    <th>Telephone</th>
                                                     <th>Pay Salary</th>
                                                     <th>Remove</th>
                                                 </tr>
@@ -136,6 +142,7 @@
                                                     <th scope="row"> {{ key+1 }} </th>
                                                     <td>{{ staff.name }}</td>
                                                     <td>{{ staff.role }}</td>
+                                                    <td>{{staff.telephone}}</td>
                                                     <td><button class = "btn btn-secondary" data-toggle="modal" data-target=".bs-example-modal-center-2">Pay Salary</button></td>
                                                     <td><a class = "btn btn-danger" href = "#">Remove</a></td>
                                                 </tr>
@@ -185,6 +192,7 @@ export default {
         var form = reactive({
             name:"",
             role:"",
+            telephone:""
         })
         var form2 = reactive({
             amount:"",
@@ -199,7 +207,10 @@ export default {
                     alertify.success(res.data.message)
                     Inertia.reload({only:['staffs']})
                 }
-            })
+                else{
+                    alertify.error(res.data.message);
+                }
+            }).catch((rez)=>{console.log(rez.response)})
         }
         function paySalary()
         {
