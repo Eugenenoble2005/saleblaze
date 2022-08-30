@@ -78,7 +78,7 @@
                                         <div class="media">
                                             <div class="media-body">
                                                 <p class="text-muted mb-2">This month's Sale</p>
-                                                <h4>&#8358; 1,230,050</h4>
+                                                <h4>&#8358; {{ (auth.user.total_revenue).toLocaleString()}}</h4>
                                             </div>
                                             <div dir="ltr" class="ml-2">
 <!--                                                <input data-plugin="knob" data-width="56" data-height="56" data-linecap=round data-displayInput=false-->
@@ -159,7 +159,7 @@
 
                                                 <div class="media-body">
                                                     <p class="text-muted mb-2">Number of Sales</p>
-                                                    <h5 class="mb-0">335</h5>
+                                                    <h5 class="mb-0"> {{ auth.user.total_sales}} </h5>
                                                 </div>
                                                 <div class="icons-lg ml-2 align-self-center">
                                                     <i class="uim uim-layer-group"></i>
@@ -170,7 +170,7 @@
                                             <div class="media my-2">
                                                 <div class="media-body">
                                                     <p class="text-muted mb-2">Sales Profit </p>
-                                                    <h5 class="mb-0"> &#8358; 700,000</h5>
+                                                    <h5 class="mb-0 text" :class="{'text-danger':auth.user.total_profit<1, 'text-success':auth.user.total_profit > 1}"> &#8358; {{ auth.user.total_profit}}</h5>
                                                 </div>
                                                 <div class="icons-lg ml-2 align-self-center">
                                                     <i class="uim uim-analytics"></i>
@@ -209,7 +209,7 @@ import {Inertia} from "@inertiajs/inertia";
 import Shared from "../components/shared";
 export default {
     name: "home",
-    props:["sales"],
+    props:["sales","auth"],
     components: {Shared, Topbar, Sidebar,Head,Footer},
 
 }

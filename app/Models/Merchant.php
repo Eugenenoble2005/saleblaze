@@ -5,7 +5,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 class Merchant extends Authenticatable
 {
-    public $appends = ["total_profit","total_cost","total_revenue"];
+    public $appends = ["total_profit","total_cost","total_revenue","total_sales"];
     public function inventory()
     {
         return $this->hasMany(inventory::class);
@@ -29,6 +29,10 @@ class Merchant extends Authenticatable
     public function getTotalRevenueAttribute()
     {
         return $this->purchase()->sum("amount");
+    }
+    public function  getTotalSalesAttribute()
+    {
+        return $this->purchase()->sum("units");
     }
     public function getTotalProfitAttribute()
     {
